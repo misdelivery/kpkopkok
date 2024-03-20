@@ -50,15 +50,12 @@ def preprocess_function(examples):
     return {"text": "".join(lines)}
 
 wiki_dataset = load_dataset("range3/wiki40b-ja", split="train")
-wiki_eval_dataset = load_dataset("range3/wiki40b-ja", split="validation+test")
 
 # データセットをプリプロセス
 processed_dataset = wiki_dataset.map(preprocess_function, remove_columns=["wikidata_id", "version_id"])
-processed_eval_dataset = wiki_eval_dataset.map(preprocess_function, remove_columns=["wikidata_id", "version_id"])
 
 # データセットをトークン化
 tokenized_datasets = processed_dataset.map(tokenize_function, batched=True)
-tokenized_eval_datasets = processed_eval_dataset.map(tokenize_function, batched=True)
 
 # データコレーターの準備
 data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
@@ -77,7 +74,6 @@ args = TrainingArguments(
     warmup_steps=500,
     weight_decay=0.01,
     logging_steps=10,
-    eval_steps=500,
 )
 
 trainer = MambaTrainer(
@@ -86,7 +82,6 @@ trainer = MambaTrainer(
     tokenizer=tokenizer,
     data_collator=data_collator,
     train_dataset=tokenized_datasets,
-    eval_dataset=tokenized_eval_datasets
 )
 
 trainer.train()
