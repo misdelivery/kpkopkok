@@ -11,7 +11,7 @@ mamba_config = MambaConfig(
     vocab_size = len(tokenizer),
     pad_token_id=tokenizer.pad_token_id,
     eos_token_id=tokenizer.eos_token_id,
-    use_cache=False
+    use_cache=True
 )
 
 model = MambaForCausalLM.from_pretrained('mambabyte-130m_checkpoints/checkpoint-13000', config=mamba_config)
