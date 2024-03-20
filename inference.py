@@ -14,7 +14,7 @@ mamba_config = MambaConfig(
     use_cache=True
 )
 
-model = MambaForCausalLM.from_pretrained('mambabyte-130m_checkpoints/checkpoint-13000', config=mamba_config)
+model = MambaForCausalLM.from_pretrained('mambabyte-130m_checkpoints/checkpoint-13000', config=mamba_config, torch_dtype=torch.bfloat16,)
 
 import torch
 model.to('cuda:0')
