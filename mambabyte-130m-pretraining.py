@@ -86,5 +86,5 @@ trainer = MambaTrainer(
     train_dataset=tokenized_datasets,
 )
 
-trainer.train()
+trainer.train(resume_from_checkpoint = True)
 trainer.save_model('mambabyte-130m')
