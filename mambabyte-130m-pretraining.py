@@ -71,14 +71,13 @@ args = TrainingArguments(
     save_steps=500,
     save_total_limit=5,
     num_train_epochs=3,
-    per_device_train_batch_size=1,
+    per_device_train_batch_size=8,
     lr_scheduler_type='constant',
     learning_rate=6e-4,
     warmup_steps=500,
     weight_decay=0.01,
     logging_steps=10,
     eval_steps=500,
-    evaluation_strategy="steps",
 )
 
 trainer = MambaTrainer(
