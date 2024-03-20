@@ -33,6 +33,18 @@ with torch.no_grad():
     input_ids.to(model.device),
     max_length=800,
     do_sample=True,
+    temperature=0.3,
+    repetition_penalty=1.1
+)
+
+print(tokenizer.decode(output_ids.tolist()[0], skip_special_tokens=True))
+
+with torch.no_grad():
+    input_ids = tokenizer.encode("夏目漱石は、", add_special_tokens=False, return_tensors="pt")
+    output_ids = model.generate(
+    input_ids.to(model.device),
+    max_length=800,
+    do_sample=True,
     temperature=0.6,
     repetition_penalty=1.1
 )
