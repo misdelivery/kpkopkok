@@ -1,4 +1,4 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 import torch
 
 model_name = "jovyan/Swallow-MS-7b-v0.1-ChatVector"
