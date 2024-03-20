@@ -15,8 +15,9 @@ prompt = "<s>[INST]まど☆マギで一番かわいいのは誰ですか？[/IN
 generator_params = dict(
     max_new_tokens = 256,
     do_sample = True,
-    temperature = 0.99,
+    temperature = 0.6,
     top_p = 0.95,
+    repetition_penalty=1.1,
     pad_token_id = tokenizer.eos_token_id,
 )
 
