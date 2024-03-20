@@ -31,7 +31,7 @@ class MambaTrainer(Trainer):
 from transformers import DataCollatorForLanguageModeling
 
 def tokenize_function(examples):
-    return tokenizer(examples["text"], return_special_tokens_mask=True, max_length=1000, truncation=True, padding="max_length")
+    return tokenizer(examples["text"], return_special_tokens_mask=True, max_length=800, truncation=True, padding="max_length")
 
 def preprocess_function(examples):
     text = examples["text"]
