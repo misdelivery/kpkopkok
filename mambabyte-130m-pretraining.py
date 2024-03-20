@@ -44,6 +44,7 @@ def preprocess_function(examples):
             para = para[len("_START_PARAGRAPH_"):]
         if len(para) > 0:
             for line in para.split("_NEWLINE_"):
+                line = re.sub(r'(概要|略歴・人物|生涯|経歴)', '', line)
                 if len(line) > 0:
                     lines.append(line)
     return {"text": "".join(lines)}
