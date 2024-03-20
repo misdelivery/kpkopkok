@@ -10,7 +10,7 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
-prompt = "<s>[INST]まど☆マギで一番かわいいのは誰ですか？[/INST]"
+prompt = "<s>[INST]こんにちは、よろしくお願いします。[/INST]"
 
 generator_params = dict(
     max_new_tokens = 256,
