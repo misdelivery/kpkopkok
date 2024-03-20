@@ -33,7 +33,7 @@ with torch.no_grad():
     input_ids.to(model.device),
     max_length=800,
     do_sample=True,
-    temperature=0.1,
+    temperature=0.6,
     repetition_penalty=1.1
 )
 
