@@ -10,7 +10,7 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
-prompt = "<s>[INST]Databricksの特長をJSON形式で出力してください。[/INST]"
+prompt = "<s>[INST]ボカロ曲の特徴をJSON形式で出力してください。[/INST]"
 
 generator_params = dict(
     max_new_tokens = 256,
