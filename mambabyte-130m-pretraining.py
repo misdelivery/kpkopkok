@@ -69,10 +69,12 @@ args = TrainingArguments(
     save_total_limit=5,
     num_train_epochs=3,
     per_device_train_batch_size=32,
-    lr_scheduler_type='constant',
+    lr_scheduler_type='consine',
+    adam_beta1=0.9,
+    adam_beta2=0.95,
     learning_rate=6e-4,
     warmup_steps=500,
-    weight_decay=0.01,
+    weight_decay=0.1,
     logging_steps=10,
 )
 
