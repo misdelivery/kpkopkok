@@ -10,7 +10,7 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
-prompt = "<s>[INST]富士山は日本のどの県に位置するでしょうか？[/INST]"
+prompt = "<s>[INST]実は今日わたしの誕生日なんですよ。[/INST]"
 
 generator_params = dict(
     max_new_tokens = 256,
