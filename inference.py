@@ -48,3 +48,5 @@ with torch.no_grad():
     temperature=0.6,
     repetition_penalty=1.1
 )
+
+print(tokenizer.decode(output_ids.tolist()[0], skip_special_tokens=True))
