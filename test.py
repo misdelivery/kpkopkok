@@ -1,29 +1,30 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+from transformers import MambaForCausalLM, AutoTokenizer
+import transformers
 import torch
 
-model_name = "jovyan/Swallow-MS-7b-v0.1-ChatVector"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(
-    model_name,
-    torch_dtype=torch.bfloat16,
-    device_map="auto",
-)
-generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
-
-prompt = "<s>[INST]まどか☆マギカでは誰が一番かわいい？[/INST]"
-
-generator_params = dict(
-    max_new_tokens = 256,
-    do_sample = True,
-    temperature = 0.6,
-    top_p = 0.95,
-    repetition_penalty=1.1,
-    pad_token_id = tokenizer.eos_token_id,
+model = MambaForCausalLM.from_pretrained("misdelivery/frankenmamba-4.2B")
+tokenizer = AutoTokenizer.from_pretrained("misdelivery/frankenmamba-4.2B")
+model.to('cuda:0')
+with torch.no_grad():
+    input_ids = tokenizer.encode("Shakespeare is", add_special_tokens=False, return_tensors="pt")
+    output_ids = model.generate(
+    input_ids.to(model.device),
+    max_length=256,
+    do_sample=True,
+    temperature=0.6,
+    repetition_penalty=1.1
 )
 
-output = generator(
-    prompt,
-    **generator_params,
+tokenizer.decode(output_ids.tolist()[0], skip_special_tokens=True)
+
+with torch.no_grad():
+    input_ids = tokenizer.encode("夏目漱石は、", add_special_tokens=False, return_tensors="pt")
+    output_ids = model.generate(
+    input_ids.to(model.device),
+    max_length=256,
+    do_sample=True,
+    temperature=0.6,
+    repetition_penalty=1.1
 )
 
-print(output[0]["generated_text"])
+tokenizer.decode(output_ids.tolist()[0], skip_special_tokens=True)
