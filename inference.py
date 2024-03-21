@@ -1,7 +1,7 @@
 from transformers import AutoTokenizer, MambaForCausalLM, MambaConfig
 import torch
 
-tokenizer = AutoTokenizer.from_pretrained('mambabyte-130m_checkpoints/checkpoint-13000')
+tokenizer = AutoTokenizer.from_pretrained('mambabyte-130m_checkpoints/checkpoint-17000')
 if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
 
@@ -14,7 +14,7 @@ mamba_config = MambaConfig(
     use_cache=True
 )
 
-model = MambaForCausalLM.from_pretrained('mambabyte-130m_checkpoints/checkpoint-13000', config=mamba_config, torch_dtype=torch.bfloat16,)
+model = MambaForCausalLM.from_pretrained('mambabyte-130m_checkpoints/checkpoint-17000', config=mamba_config, torch_dtype=torch.bfloat16,)
 
 import torch
 model.to('cuda:0')
