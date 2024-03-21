@@ -34,7 +34,7 @@ with torch.no_grad():
     max_length=800,
     do_sample=True,
     temperature=0.3,
-    tok_k=20,
+    top_k=20,
     repetition_penalty=1.1
 )
 
