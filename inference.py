@@ -50,4 +50,4 @@ with torch.no_grad():
 )
 
 print(tokenizer.decode(output_ids.tolist()[0], skip_special_tokens=True))
-
+print(output_ids.tolist()[0])
