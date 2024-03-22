@@ -2,8 +2,9 @@ from transformers import MambaForCausalLM, AutoTokenizer
 import transformers
 import torch
 
-model = MambaForCausalLM.from_pretrained("misdelivery/frankenmamba-4.2B")
-tokenizer = AutoTokenizer.from_pretrained("misdelivery/frankenmamba-4.2B")
+model = MambaForCausalLM.from_pretrained("misdelivery/frankenmamba-5.6B",torch_dtype=torch.bfloat16)
+tokenizer = AutoTokenizer.from_pretrained('misdelivery/frankenmamba-5.6B')
+
 model.to('cuda:0')
 with torch.no_grad():
     input_ids = tokenizer.encode("Shakespeare is", add_special_tokens=False, return_tensors="pt")
@@ -15,7 +16,7 @@ with torch.no_grad():
     repetition_penalty=1.1
 )
 
-tokenizer.decode(output_ids.tolist()[0], skip_special_tokens=True)
+print(tokenizer.decode(output_ids.tolist()[0], skip_special_tokens=True))
 
 with torch.no_grad():
     input_ids = tokenizer.encode("夏目漱石は、", add_special_tokens=False, return_tensors="pt")
@@ -27,4 +28,4 @@ with torch.no_grad():
     repetition_penalty=1.1
 )
 
-tokenizer.decode(output_ids.tolist()[0], skip_special_tokens=True)
+print(tokenizer.decode(output_ids.tolist()[0], skip_special_tokens=True))
